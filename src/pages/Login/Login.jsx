@@ -1,9 +1,20 @@
-import React from "react";
+import React, { use } from "react";
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/lotties/login.json";
 import { Link } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 const Login = () => {
+  const { loginUser } = use(AuthContext);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { email, password } = Object.fromEntries(formData.entries());
+    loginUser(email, password)
+      .then((result) => console.log(result.user))
+      .catch((error) => console.log(error.message));
+  };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col md:flex-row gap-6 items-center justify-around px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -12,7 +23,7 @@ const Login = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Login to account
             </h1>
-            <form className="space-y-4 md:space-y-6">
+            <form onSubmit={handleLogin} className="space-y-4 md:space-y-6">
               <div>
                 <label
                   htmlFor="email"
