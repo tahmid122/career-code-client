@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import loginAnimation from "../../assets/lotties/login.json";
 import { Link } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
   const { loginUser } = use(AuthContext);
@@ -71,6 +72,7 @@ const Login = () => {
                 </Link>
               </p>
             </form>
+            <SocialLogin />
           </div>
         </div>
         <div className="w-6/12">

@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import registerAnimation from "../../assets/lotties/register.json";
 import { Link } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+import SocialLogin from "../Shared/SocialLogin";
 const Register = () => {
   const { createUser } = use(AuthContext);
   const handleRegister = (e) => {
@@ -24,6 +25,7 @@ const Register = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
+
             <form onSubmit={handleRegister} className="space-y-4 md:space-y-6">
               <div>
                 <label
@@ -72,6 +74,7 @@ const Register = () => {
                 </Link>
               </p>
             </form>
+            <SocialLogin />
           </div>
         </div>
         <div className="w-6/12">
