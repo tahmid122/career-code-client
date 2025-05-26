@@ -1,19 +1,25 @@
 import React, { use } from "react";
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/lotties/login.json";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
   const { loginUser } = use(AuthContext);
+  const location = useLocation();
+  const path = location.state;
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const { email, password } = Object.fromEntries(formData.entries());
     loginUser(email, password)
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        console.log(result.user);
+        navigate(path || "/");
+      })
       .catch((error) => console.log(error.message));
   };
   return (
@@ -72,7 +78,7 @@ const Login = () => {
                 </Link>
               </p>
             </form>
-            <SocialLogin />
+            <SocialLogin path={path} />
           </div>
         </div>
         <div className="w-6/12">
