@@ -17,7 +17,11 @@ const JobsCard = ({ job }) => {
     <div className="card bg-base-100 w-96 shadow-sm dark:shadow-white p-2">
       <div className="flex items-center gap-4">
         <figure>
-          <img src={company_logo} className="w-16" alt="Shoes" />
+          <img
+            src={company_logo ? company_logo : null}
+            className="w-16"
+            alt="Shoes"
+          />
         </figure>
         <div>
           <h4>{company}</h4>

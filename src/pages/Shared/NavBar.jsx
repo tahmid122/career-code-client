@@ -1,7 +1,6 @@
 import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-
 const NavBar = () => {
   const { logOut, user } = use(AuthContext);
   const links = (
@@ -9,6 +8,7 @@ const NavBar = () => {
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
+      {/* for applicant links: check role as well */}
       {user && (
         <>
           <li>
@@ -16,6 +16,20 @@ const NavBar = () => {
           </li>
         </>
       )}
+      {/* for recruiter links: check role as well */}
+      {user && (
+        <>
+          <li>
+            <NavLink to={"/addJob"}>Add Job</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/myPostedJobs"}>My Posted Jobs</NavLink>
+          </li>
+        </>
+      )}
+      <li>
+        <NavLink to={"/"}>Contact</NavLink>
+      </li>
     </>
   );
   const handleLogout = () => {
@@ -24,7 +38,7 @@ const NavBar = () => {
       .catch((error) => console.log(error.message));
   };
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -51,7 +65,9 @@ const NavBar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link to={"/"} className="text-2xl font-bold">
+          Career Code
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -63,10 +79,15 @@ const NavBar = () => {
           </button>
         ) : (
           <>
-            <Link to={"/register"} className="btn">
-              Register
-            </Link>
-            <Link to={"/register"} className="btn">
+            <span>
+              <Link
+                to={"/register"}
+                className="underline mr-5 font-semibold text-base hover:text-indigo-600"
+              >
+                Register
+              </Link>
+            </span>
+            <Link to={"/register"} className="btn bg-indigo-600 text-white">
               Sign In
             </Link>
           </>
